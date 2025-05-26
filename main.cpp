@@ -15,7 +15,6 @@ struct Transaction {
     string date;
 };
 
-// Input validation for positive amounts
 double getValidAmount() {
     double amount;
     while(true) {
@@ -28,7 +27,6 @@ double getValidAmount() {
     }
 }
 
-// Enhanced transaction addition with validation
 void addTransaction(vector<Transaction> &transactions, const string &type) {
     Transaction t;
     t.type = type;
@@ -50,7 +48,6 @@ void addTransaction(vector<Transaction> &transactions, const string &type) {
     cout << "Transaction added successfully!" << endl;
 }
 
-// Enhanced view with better formatting
 void viewAll(const vector<Transaction> &transactions) {
     if(transactions.empty()) {
         cout << "No transactions found!" << endl;
@@ -70,7 +67,6 @@ void viewAll(const vector<Transaction> &transactions) {
     }
 }
 
-// Enhanced reporting with category breakdown
 void viewReport(const vector<Transaction> &transactions) {
     if(transactions.empty()) {
         cout << "No transactions to report!" << endl;
@@ -100,7 +96,6 @@ void viewReport(const vector<Transaction> &transactions) {
         cout << "⚠️  You're spending more than you earn!" << endl;
     }
     
-    // Category breakdown
     cout << "\n--- Income by Category ---" << endl;
     for(const auto &pair : incomeByCategory) {
         cout << pair.first << ": $" << pair.second << endl;
@@ -112,7 +107,6 @@ void viewReport(const vector<Transaction> &transactions) {
     }
 }
 
-// Enhanced file operations with error handling
 void saveToFile(const vector<Transaction> &transactions, const string &filename) {
     ofstream file(filename);
     if(!file.is_open()) {
@@ -120,7 +114,6 @@ void saveToFile(const vector<Transaction> &transactions, const string &filename)
         return;
     }
     
-    // Save with header
     file << "Type,Category,Amount,Date" << endl;
     for(const Transaction &t : transactions) {
         file << t.type << "," << t.category << "," << t.amount << "," << t.date << endl;
@@ -139,7 +132,6 @@ void loadFromFile(vector<Transaction> &transactions, const string &filename) {
     string line;
     transactions.clear();
     
-    // Skip header if present
     getline(file, line);
     if(line != "Type,Category,Amount,Date") {
         file.seekg(0); // Go back to beginning if no header
